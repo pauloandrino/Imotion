@@ -1,34 +1,16 @@
 package br.com.pma.imotion.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import br.com.pma.imotion.model.Usuario;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
-
-	@RequestMapping("loginForm")
-	public String loginForm() {
-		return "formulario-login";
-	}
-	
-	@RequestMapping("efetuaLogin")
-	public String efetuaLogin(Usuario usuario, HttpSession session) {
-		
-//		if (new JdbcUsuarioDao().existeUsuario(usuario)) {
-			session.setAttribute("usuarioLogado", usuario);
-			return "menu";
-//		}
-		
-//		return "redirect:loginForm";
-	}
-	
-	@RequestMapping("logout")
-	public String logout(HttpSession session){
-		session.invalidate();
-		return "redirect:loginForm";
-	}
+ 
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
+    public ModelAndView doGet() {
+        return new ModelAndView("login");
+    }
 }
